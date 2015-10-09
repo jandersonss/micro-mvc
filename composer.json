@@ -1,0 +1,12 @@
+{
+    "name": "jandersonss/micro-mvc",
+    "authors": [
+        {
+            "name": "Janderson Oliveira",
+            "email": "jsolemos@gmail.com.br"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.17"
+    }
+}
