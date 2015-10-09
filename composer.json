@@ -1,12 +1,22 @@
 {
     "name": "jandersonss/micro-mvc",
+    "type": "framework",
+    "homepage": "https://github.com/jandersonss/micro-mvc",
+    "license": "MIT",
     "authors": [
         {
             "name": "Janderson Oliveira",
-            "email": "jsolemos@gmail.com.br"
+            "email": "jsolemos@gmail.com.br",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": ">=5.3.17"
+    },
+    "autoload": {
+        "psr-4": {
+            "jandersonss\\MicroMVC\\": "src/",
+            "App\\": "src/"
+        }
     }
 }
