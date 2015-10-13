@@ -23,11 +23,10 @@ class Aplicacao implements interfaceAplicacao
     public $action = "index"; //nome da acao/metodo padrão
     public $id = null;
     public $num_pag = 0; //numero da página padrao
-
     public $REQUEST = array();
 
-    public function __construct($REQUEST, $nameSpaceAPP = "App"){
-        $this->REQUEST = $REQUEST;
+    public function __construct($nameSpaceAPP = "App"){
+        $this->REQUEST = Request::getAll();
         $this->nameSpaceAPP = $nameSpaceAPP;
     }
 
