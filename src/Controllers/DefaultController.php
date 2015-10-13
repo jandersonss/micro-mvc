@@ -12,14 +12,14 @@ class DefaultController
     protected $_modelBaseName;
     protected $_num_pag;
 
-    public function __construct($model, $action, $num_pag, $app)
+    public function __construct($model, $action, $num_pag, $aplicacao)
     {
 
         $this->_controller = ucwords(__CLASS__);
         $this->_action = $action;
         $this->_modelBaseName = $model;
         $this->_num_pag = $num_pag;
-        $this->aplicacao = $app;
+        $this->aplicacao = $aplicacao;
 
         $this->_view = new DefaultView(TEMPLATES_PATH . DS . strtolower($this->_modelBaseName) . DS . $action . '.tpl');
         $this->_setDefaulDadosView();
@@ -46,7 +46,7 @@ class DefaultController
 
         $nameSpaceClass = "\\{$this->aplicacao->nameSpaceAPP}\\{$this->aplicacao->nameSpaceModels}\\".$modelName;
 
-        $this->_model = new $nameSpaceClass();
+        $this->_model = new $nameSpaceClass($this->aplicacao);
         $this->_model->_setNumPagina($this->_num_pag);
 
     }

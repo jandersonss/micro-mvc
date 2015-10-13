@@ -13,10 +13,13 @@ class DefaultModel
     protected $_num_pag = 0;
     protected $_results_total = 0;
     protected $_results_parcial = 0;
+    protected $aplicacao;
 
-    public function __construct()
+    public function __construct($aplicacao)
     {
-        $this->_db = new  Conexao(config_db_login, config_db_senha, config_db_base, config_db_host);
+        $this->aplicacao = $aplicacao;
+        $conf = $this->aplicacao->getConfigConexao();
+        $this->_db = new Conexao($conf['usuario'], $conf['senha'],$conf['banco'], $conf['host'],$conf['charset']);
     }
 
     public function _setNumPagina($num_pag = 0){

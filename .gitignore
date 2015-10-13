@@ -1,5 +1,6 @@
 /vendor/
 /app/
-./index.php
-./funcoes.php
-./.htaccess
+/conf/
+/index.php
+/funcoes.php
+/.htaccess

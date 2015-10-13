@@ -1,5 +1,6 @@
 <?php
 namespace jandersonss\MicroMVC;
+use jandersonss\MicroMVC\Conexao\Config;
 
 /**
  * Created by PhpStorm.
@@ -7,8 +8,11 @@ namespace jandersonss\MicroMVC;
  * Date: 09/10/15
  * Time: 16:24
  */
-class Aplicacao implements interfaceAplicacao
-{
+class Aplicacao {
+
+    protected $configs;
+    protected $tipo_config = "PRODUCAO";
+
     public $nameSpaceAPP = "App";
     public $nameSpaceController = "Controllers";
     public $nameSpaceModels = "Models";
@@ -28,6 +32,38 @@ class Aplicacao implements interfaceAplicacao
     public function __construct($nameSpaceAPP = "App"){
         $this->REQUEST = Request::getAll();
         $this->nameSpaceAPP = $nameSpaceAPP;
+        $this->configs = new Config();
+    }
+
+    /**
+     * @return string
+     */
+    public function getTipoConfig()
+    {
+        return $this->tipo_config;
+    }
+
+    /**
+     * @param string $tipo_config
+     */
+    public function setTipoConfig($tipo_config)
+    {
+        $this->tipo_config = $tipo_config;
+    }
+
+
+    /**
+     * @return void
+     */
+    public function addConfigs($configs){
+        $this->configs->addConfigs($configs);
+    }
+
+    /**
+     * @return void
+     */
+    public function getConfigConexao(){
+        return $this->configs->getConfig($this->tipo_config);
     }
 
     /**

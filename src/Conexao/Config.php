@@ -12,28 +12,44 @@ use \Exception;
 
 class Config
 {
-    protected $tipos_banco = array("PRODUCAO","DESENVOLVIMENTO");
-    private $dados_banco = array();
+
+    private $configs = array();
     protected $campos_banco = array("host","usuario","senha","banco","charset");
     private $campos_nao_encontrados = array();
 
-    public function __construct(interfaceConexao $dados_bancos){
-        foreach($this->tipos_banco as $tipo) {
-            $banco = $dados_bancos->{'getDadosBanco'.$tipo}();
+    public function __construct(){
+        $this->addConfigs(array("PRODUCAO"=>array(
+                                    "usuario"=>config_db_login,
+                                    "senha"=>config_db_senha,
+                                    "banco"=>config_db_base,
+                                    "host" =>config_db_host,
+                                    "charset" =>config_db_charset
+                                )));
+
+    }
+
+    public function addConfigs($configs){
+        foreach($configs as $tipo=>$config) {
+            $banco = $config;
             $this->campos_nao_encontrados[$tipo] = $this->checkDados($banco);
             if (!count($this->campos_nao_encontrados[$tipo])) {
-                $this->dados_bancos[$tipo] = $banco;
+                $this->configs[$tipo] = $banco;
 
             }
         }
+
         $list_erros = array();
         foreach($this->campos_nao_encontrados as $tipo=>$campos){
             if(count($campos)){
                 $list_erros[] = "Tipo do banco -> ".$tipo . " - Campos -> ".implode(",",$campos)."";
             }
         }
+
         if(count($list_erros))
             throw new Exception("ERROR: Os campos abaixo não foram encontrados na configuração passada<br>".implode("<br>",$list_erros));
+        else
+            array_merge($config, $this->configs);
+
     }
 
     private function checkDados($dados){
@@ -48,7 +64,11 @@ class Config
     }
 
     public function  getConfig($tipo = "PRODUCAO"){
-        return $this->dados_bancos[$tipo];
+        return $this->configs[$tipo];
+    }
+
+    public function getConfigs(){
+        return $this->configs;
     }
 }
 

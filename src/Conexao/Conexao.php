@@ -11,24 +11,25 @@ class Conexao
      private $senha;
      private $banco;
      private $host;
+     private $charset;
      public $db = null;
      public $countConexoes = 0;
      private $conectado = false;
 
 
-     function __construct($usuario, $senha,$banco, $host = "localhost"){
+     function __construct($usuario, $senha,$banco, $host = "localhost", $charset = "utf8"){
           $this->usuario = $usuario;
           $this->senha = $senha;
           $this->banco = $banco;
           $this->host = $host;
-
+          $this->charset = $charset;
      }
 
      public function conectar(){
           if(!$this->conectado){
                try {
                     $this->db = new mysqli($this->host, $this->usuario, $this->senha, $this->banco);
-                    $this->db->set_charset("utf8");
+                    $this->db->set_charset($this->charset);
                     $this->countConexoes++;
                     $this->conectado = true;
                }catch (Exception $e) {
