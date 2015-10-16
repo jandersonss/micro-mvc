@@ -9,9 +9,9 @@ class DefaultView
 
     public function __construct($file, $index_file = null){
         $this->_file = $file;
-        if($index_file == null)
+        if($index_file == null )
              $this->_index_file = TEMPLATES_PATH . DS . 'index.tpl';
-         else
+        else
             $this->_index_file = $index_file;
     }
 
@@ -25,7 +25,7 @@ class DefaultView
 
     public function output(){
 
-        if (!file_exists($this->_index_file))
+        if ($this->_index_file != false && !file_exists($this->_index_file))
         {
             throw new Exception("Template " . $this->_index_file . " não existe");
         }
@@ -34,7 +34,11 @@ class DefaultView
             throw new Exception("Template " . $this->_file . " não existe");
         }
 
+        if($this->_index_file != false)
+            $this->_index_file = $this->_file;
+
         $this->set("PAGE_FILE",$this->_file);
+
         extract($this->_data);
         ob_start();
         include($this->_index_file);

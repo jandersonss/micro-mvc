@@ -51,9 +51,9 @@ class DefaultController
 
     }
 
-    protected function _setView($viewName)
+    protected function _setView($viewName, $index_file = null)
     {
-        $this->_view = new DefaultView(TEMPLATES_PATH . DS . strtolower($this->_modelBaseName) . DS . $viewName . '.tpl');
+        $this->_view = new DefaultView(TEMPLATES_PATH . DS . strtolower($this->_modelBaseName) . DS . $viewName . '.tpl', $index_file);
         $this->_setDefaulDadosView();
     }
 }
