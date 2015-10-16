@@ -9,7 +9,7 @@ class DefaultView
 
     public function __construct($file, $index_file = null){
         $this->_file = $file;
-        if($index_file == null )
+        if($index_file != false && $index_file == null )
              $this->_index_file = TEMPLATES_PATH . DS . 'index.tpl';
         else
             $this->_index_file = $index_file;
