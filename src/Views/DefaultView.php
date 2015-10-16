@@ -34,7 +34,7 @@ class DefaultView
             throw new Exception("Template " . $this->_file . " não existe");
         }
 
-        if($this->_index_file != false)
+        if($this->_index_file == false)
             $this->_index_file = $this->_file;
 
         $this->set("PAGE_FILE",$this->_file);
