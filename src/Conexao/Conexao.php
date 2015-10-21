@@ -49,7 +49,7 @@ class Conexao
           return $this->db;
      }
 
-     public function query($sql_query){
+     public function query($sql_query,$fecht_object = false){
                if(!$this->conectado) $this->conectar();
 
                if(empty($sql_query) || $sql_query == null){
@@ -63,9 +63,15 @@ class Conexao
                     throw new Exception("SQL Error: ".$this->db->error);
                 }else{
                     $dados = array();
-                    while($row = $stmt->fetch_assoc()){
-                         $dados[] = $row;
-                    }
+                   if($fecht_object) {
+                       while ($row = $stmt->fetch_object()) {
+                           $dados[] = $row;
+                       }
+                   }else{
+                       while ($row = $stmt->fetch_assoc()) {
+                           $dados[] = $row;
+                       }
+                   }
                 }
 
                $this->desconetar();

@@ -23,11 +23,11 @@ class DefaultModel
     }
 
     public function _setNumPagina($num_pag = 0){
-    	$this->_num_pag = $num_pag;
+        $this->_num_pag = $num_pag;
     }
 
     public function getNumPagina(){
-    	return $this->_num_pag;
+        return $this->_num_pag;
     }
 
     public function _setTabela($tabela){
@@ -35,7 +35,7 @@ class DefaultModel
     }
 
     public function getTabela(){
-    	return $this->_tabela;
+        return $this->_tabela;
     }
 
     public function getResultTotal(){
@@ -43,7 +43,7 @@ class DefaultModel
     }
 
     public function getResultParcial(){
-    	return $this->_results_parcial;
+        return $this->_results_parcial;
     }
 
     public function _setSql($sql)
@@ -56,11 +56,11 @@ class DefaultModel
     }
 
     public function getQtdPagina(){
-    	return $this->_qtdPagina;
+        return $this->_qtdPagina;
     }
 
     public function _setQtdPagina($qtdPagina = 10){
-    	$this->_qtdPagina = $qtdPagina;
+        $this->_qtdPagina = $qtdPagina;
     }
 
     public function getAll($data = null)
@@ -86,36 +86,36 @@ class DefaultModel
     }
 
     public function getPorPagina(){
-    	if (!$this->_sql)
-    	{
-    		throw new Exception("SQL não foi definido.");
-    	}
-    	if (!$this->_sqlCount)
-    	{
-    		throw new Exception("SQL de contagem não foi definido.");
-    	}
+        if (!$this->_sql)
+        {
+            throw new Exception("SQL não foi definido.");
+        }
+        if (!$this->_sqlCount)
+        {
+            throw new Exception("SQL de contagem não foi definido.");
+        }
 
-    	$total_results = $this->_db->query($this->_sqlCount);
+        $total_results = $this->_db->query($this->_sqlCount);
 
-            if(count($total_results)){
-                $CAMPO = array_keys($total_results[0]);
-                $this->_results_total = $total_results[0][$CAMPO[0]];
-            }
+        if(count($total_results)){
+            $CAMPO = array_keys($total_results[0]);
+            $this->_results_total = $total_results[0][$CAMPO[0]];
+        }
 
-    	$nInit = $this->_num_pag*$this->getQtdPagina();
+        $nInit = $this->_num_pag*$this->getQtdPagina();
 
-             $this->_sql .= " LIMIT %s, %s";
+         $this->_sql .= " LIMIT %s, %s";
 
-             $this->_sql = sprintf($this->_sql,
-                 $nInit,
-                 $this->getQtdPagina()
-             );
+         $this->_sql = sprintf($this->_sql,
+             $nInit,
+             $this->getQtdPagina()
+         );
 
 
-             $rows = $this->_db->query($this->_sql);
-    	$this->_results_parcial = count($rows);
+        $rows = $this->_db->query($this->_sql,true);
+        $this->_results_parcial = count($rows);
 
-    	return $rows;
+        return $rows;
 
     }
 
