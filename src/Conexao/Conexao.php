@@ -110,11 +110,6 @@ class Conexao
         $stmt = $this->db->prepare($sql);
 
 
-        echo $sql;
-        echo "<pre>";
-        print_r($this->db);
-        echo "</pre>";
-
         if($stmt) {
             $this->bindParamsDinamico($stmt, $valores);
             $stmt->execute();
