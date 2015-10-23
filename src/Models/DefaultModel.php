@@ -128,6 +128,8 @@ class DefaultModel
             throw new Exception("SQL não foi definido.");
         }
 
-        return $this->_db->query($this->_sql,$fecht_object);
+        $rows = $this->_db->query($this->_sql,$fecht_object);
+
+        return is_array($rows) && count($rows) == 1 ? array_shift($rows) : $rows
     }
 }
