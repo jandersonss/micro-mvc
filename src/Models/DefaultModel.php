@@ -130,6 +130,6 @@ class DefaultModel
 
         $rows = $this->_db->query($this->_sql,$fecht_object);
 
-        return is_array($rows) && count($rows) == 1 ? array_shift($rows) : $rows
+        return is_array($rows) && count($rows) == 1 ? array_shift($rows) : $rows;
     }
 }
