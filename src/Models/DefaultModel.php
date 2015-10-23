@@ -63,7 +63,7 @@ class DefaultModel
         $this->_qtdPagina = $qtdPagina;
     }
 
-    public function getAll($data = null, $fecht_object = false)
+    public function getAll($data = null, $fecht_object = true)
     {
         if (!$this->_sql)
         {
@@ -74,7 +74,7 @@ class DefaultModel
         return $this->_db->query($this->_sql, $fecht_object);
     }
 
-    public function getPorLimit($limit, $fecht_object = false)
+    public function getPorLimit($limit, $fecht_object = true)
     {
         if (!$this->_sql)
         {
@@ -85,7 +85,7 @@ class DefaultModel
         return $this->_db->query($this->_sql, $fecht_object );
     }
 
-    public function getPorPagina($fecht_object = false){
+    public function getPorPagina($fecht_object = true){
         if (!$this->_sql)
         {
             throw new Exception("SQL não foi definido.");
@@ -95,7 +95,7 @@ class DefaultModel
             throw new Exception("SQL de contagem não foi definido.");
         }
 
-        $total_results = $this->_db->query($this->_sqlCount);
+        $total_results = $this->_db->query($this->_sqlCount, false);
 
         if(count($total_results)){
             $CAMPO = array_keys($total_results[0]);
@@ -121,7 +121,7 @@ class DefaultModel
 
 
 
-    public function getRow($fecht_object = false)
+    public function getRow($fecht_object = true)
     {
         if (!$this->_sql)
         {
