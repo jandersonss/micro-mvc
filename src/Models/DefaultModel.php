@@ -63,7 +63,7 @@ class DefaultModel
         $this->_qtdPagina = $qtdPagina;
     }
 
-    public function getAll($data = null)
+    public function getAll($data = null, $fecht_object = false)
     {
         if (!$this->_sql)
         {
@@ -71,10 +71,10 @@ class DefaultModel
         }
 
 
-        return $this->_db->query($this->_sql);
+        return $this->_db->query($this->_sql, $fecht_object);
     }
 
-    public function getPorLimit($limit)
+    public function getPorLimit($limit, $fecht_object = false)
     {
         if (!$this->_sql)
         {
@@ -82,10 +82,10 @@ class DefaultModel
         }
         $this->_sql .= " LIMIT ".$this->_db->real_escape_string($limit);
 
-        return $this->_db->query($this->_sql, true);
+        return $this->_db->query($this->_sql, $fecht_object );
     }
 
-    public function getPorPagina(){
+    public function getPorPagina($fecht_object = false){
         if (!$this->_sql)
         {
             throw new Exception("SQL não foi definido.");
@@ -112,7 +112,7 @@ class DefaultModel
          );
 
 
-        $rows = $this->_db->query($this->_sql,true);
+        $rows = $this->_db->query($this->_sql,$fecht_object);
         $this->_results_parcial = count($rows);
 
         return $rows;
@@ -121,13 +121,13 @@ class DefaultModel
 
 
 
-    public function getRow()
+    public function getRow($fecht_object = false)
     {
         if (!$this->_sql)
         {
             throw new Exception("SQL não foi definido.");
         }
 
-        return $this->_db->query($this->_sql,true);
+        return $this->_db->query($this->_sql,$fecht_object);
     }
 }
