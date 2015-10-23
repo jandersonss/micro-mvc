@@ -82,7 +82,7 @@ class DefaultModel
         }
         $this->_sql .= " LIMIT ".$this->_db->real_escape_string($limit);
 
-        return $this->_db->query($this->_sql);
+        return $this->_db->query($this->_sql, true);
     }
 
     public function getPorPagina(){
@@ -128,6 +128,6 @@ class DefaultModel
             throw new Exception("SQL não foi definido.");
         }
 
-        return $this->_db->query($this->_sql);
+        return $this->_db->query($this->_sql,true);
     }
 }
