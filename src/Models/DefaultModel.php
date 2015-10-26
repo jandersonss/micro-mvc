@@ -80,9 +80,9 @@ class DefaultModel
         {
             throw new Exception("SQL não foi definido.");
         }
-        $this->_sql .= " LIMIT ".$this->_db->real_escape_string($limit);
+        $this->_sql .= " LIMIT ".addslashes($limit);
 
-        return $this->_db->query($this->_sql, $fecht_object );
+        return $this->_db->query($this->_sql, $fecht_object);
     }
 
     public function getPorPagina($fecht_object = true){

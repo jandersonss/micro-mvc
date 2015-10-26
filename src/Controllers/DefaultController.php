@@ -27,10 +27,10 @@ class DefaultController
 
 
     protected function _atualizaTotais(){
-    	$this->_view->set('results_tot',$this->_model->getResultTotal());
-    	$this->_view->set('results_parc',$this->_model->getResultParcial());
-    	$this->_view->set('qtd_pag',$this->_model->getQtdPagina());
-    	$this->_view->set('num_pag',$this->_model->getNumPagina());
+        $this->_view->set('results_tot',$this->_model->getResultTotal());
+        $this->_view->set('results_parc',$this->_model->getResultParcial());
+        $this->_view->set('qtd_pag',$this->_model->getQtdPagina());
+        $this->_view->set('num_pag',$this->_model->getNumPagina());
     }
 
     protected function _setDefaulDadosView(){
